@@ -19,7 +19,7 @@ async function initializeApp() {
     console.log("##### Database synchronized successfully");
 
     const { port, host } = config.server;
-    app.listen(port, () => {
+    app.listen(port, host, () => {
       console.log(`##### Inventory service is running on ${host}:${port}.`);
       console.log("##### CTRL + C to quit.");
     });

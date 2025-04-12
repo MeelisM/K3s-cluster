@@ -1,9 +1,6 @@
 # Env vars
 .env
 
-# local development scripts
-scripts/
-
 # Logs
 logs/
 *.log
@@ -139,3 +136,5 @@ Thumbs.db
 
 # Prettier
 .prettiercache
+
+token
