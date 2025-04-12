@@ -15,9 +15,12 @@ Vagrant.configure("2") do |config|
     master.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y curl
-      curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --node-ip 192.168.56.10 --bind-address 192.168.56.10
+      curl -sfL https://get.k3s.io | \
+        INSTALL_K3S_EXEC="--node-ip 192.168.56.10 --bind-address 192.168.56.10 --flannel-iface=enp0s8 --write-kubeconfig-mode 644" \
+        sh -
       echo "K3S_TOKEN=$(cat /var/lib/rancher/k3s/server/node-token)" > /vagrant/token
     SHELL
+
   end
 
   config.vm.define "agent" do |agent|
@@ -39,7 +42,10 @@ Vagrant.configure("2") do |config|
       done
       
       source /vagrant/token
-      curl -sfL https://get.k3s.io | K3S_URL=https://192.168.56.10:6443 K3S_TOKEN=${K3S_TOKEN} sh -
+      curl -sfL https://get.k3s.io | \
+        INSTALL_K3S_EXEC="--node-ip 192.168.56.11 --flannel-iface=enp0s8" \
+        K3S_URL=https://192.168.56.10:6443 \
+        K3S_TOKEN=${K3S_TOKEN} sh -
     SHELL
   end
 end
