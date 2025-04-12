@@ -10,3 +10,5 @@ generatorOptions:
     note: generated
 resources:
   - manifests/inventory-db.yaml
+  - manifests/inventory-app.yaml
+  - manifests/api-gateway-app.yaml
