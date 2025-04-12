@@ -1,0 +1,12 @@
+secretGenerator:
+  - name: orchestrator-secrets
+    envs:
+      - .env
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    type: generated
+  annotations:
+    note: generated
+resources:
+  - manifests/inventory-db.yaml

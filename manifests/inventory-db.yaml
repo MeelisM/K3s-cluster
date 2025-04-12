@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: inventory-db
+spec:
+  serviceName: inventory-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-db
+  template:
+    metadata:
+      labels:
+        app: inventory-db
+    spec:
+      containers:
+        - name: postgres
+          image: meelisdocker/inventory-db:latest
+          ports:
+            - containerPort: 5432
+          env:
+            # PostgreSQL admin credentials
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: orchestrator-secrets
+                  key: INVENTORY_POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: orchestrator-secrets
+                  key: INVENTORY_POSTGRES_PASSWORD
+            # Original variables for app compatibility
+            - name: INVENTORY_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: orchestrator-secrets
+                  key: INVENTORY_DB_USER
+            - name: INVENTORY_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: orchestrator-secrets
+                  key: INVENTORY_DB_NAME
+            - name: INVENTORY_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: orchestrator-secrets
+                  key: INVENTORY_DB_PASSWORD
+          volumeMounts:
+            - name: inventory-db-data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: inventory-db-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-db
+spec:
+  selector:
+    app: inventory-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
