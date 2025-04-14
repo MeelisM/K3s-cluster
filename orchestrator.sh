@@ -73,23 +73,7 @@ apply_manifests() {
     echo "Or add this line to your ~/.bashrc or ~/.zshrc file for permanent configuration"
     echo "======================================"
   kubectl apply -k .
-  
-  echo "Waiting for inventory-db pod to be ready..."
-  kubectl wait --for=condition=ready pod -l app=inventory-db --timeout=180s
-  
-  echo "Checking database initialization..."
-  DB_POD=$(kubectl get pods -l app=inventory-db -o jsonpath="{.items[0].metadata.name}")
-  
-  kubectl logs $DB_POD | grep "inventory-app database setup completed successfully"
-  
-  if [ $? -eq 0 ]; then
-    echo "Database initialization successful!"
-  else
-    echo "Warning: Database initialization may not have completed successfully. Check logs for details."
-    echo "Run 'kubectl logs $DB_POD' for more information."
-  fi
-  
-  echo "Setup complete!"
+  echo "Manifests applied!"
 }
 
 check_status() {

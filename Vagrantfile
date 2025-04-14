@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
       
       source /vagrant/token
       curl -sfL https://get.k3s.io | \
-        INSTALL_K3S_EXEC="--node-ip 192.168.56.11 --flannel-iface=enp0s8" \
+        INSTALL_K3S_EXEC="--flannel-iface=enp0s8" \
         K3S_URL=https://192.168.56.10:6443 \
         K3S_TOKEN=${K3S_TOKEN} sh -
     SHELL
