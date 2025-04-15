@@ -16,7 +16,7 @@ The system consists of the following components:
 - VirtualBox
 - Vagrant
 - kubectl
-- Docker Engine
+- Docker Engine (if using own Docker Hub account)
 
 ## Setup and Installation
 
