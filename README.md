@@ -11,6 +11,8 @@ The system consists of the following components:
 - Billing Service with PostgreSQL database
 - RabbitMQ Message Queue
 
+![Cluster Status Image](/image/status.png)
+
 ## Prerequisites
 
 - VirtualBox
