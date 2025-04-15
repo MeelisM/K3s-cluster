@@ -46,9 +46,16 @@ This will:
 - Install K3s on both nodes
 - Set up the master-agent relationship
 - Configure your local kubectl to connect to the cluster
-- Applies manifests
+- Apply manifests
 
-3. Verify deployment
+4. Set the `KUBECONFIG` environment variable.
+   This tells `kubectl` to use the correct kubeconfig file.
+
+```bash
+export KUBECONFIG=~/.kube/k3s-config
+```
+
+5.  Verify deployment.
 
 ```bash
 ./scripts/orchestrator.sh status
@@ -106,6 +113,42 @@ Check the status of the cluster
 ```bash
 ./scripts/orchestrator status
 ```
+
+## Components
+
+### API Gateway (api-gateway-app)
+
+- Port: 3000
+- Description: Entry point for all client requests
+- Auto-scales based on CPU usage (60%)
+- Min replicas: 1, Max replicas: 3
+
+### Inventory Service (inventory-app)
+
+- Port: 8080
+- Description: Manages movie inventory
+- Auto-scales based on CPU usage (60%)
+- Min replicas: 1, Max replicas: 3
+
+### Billing Service (billing-app)
+
+- Port: 8080
+- Description: Processes orders through RabbitMQ queue
+
+### Databases
+
+- Inventory Database (PostgreSQL)
+  - Port: 5432
+  - Deployed as StatefulSet with persistent storage
+- Billing Database (PostgreSQL)
+  - Port: 5432
+  - Deployed as StatefulSet with persistent storage
+
+### Message Queue (RabbitMQ)
+
+- AMQP Port: 5672
+- Management Port: 15672
+- Description: Handles asynchronous communication between services
 
 ## API Documentation
 

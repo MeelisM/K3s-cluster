@@ -13,6 +13,7 @@ spec:
       labels:
         app: inventory-db
     spec:
+      restartPolicy: Always
       containers:
         - name: postgres
           image: orchestratorproject/inventory-db:latest
@@ -48,6 +49,13 @@ spec:
           volumeMounts:
             - name: inventory-db-data
               mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
   volumeClaimTemplates:
     - metadata:
         name: inventory-db-data
@@ -62,6 +70,7 @@ kind: Service
 metadata:
   name: inventory-db
 spec:
+  clusterIP: None
   selector:
     app: inventory-db
   ports:

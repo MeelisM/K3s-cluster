@@ -11,7 +11,7 @@ info:
     and easy scaling of the components.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000
+  - url: 192.168.56.10:3000
     description: Development server
 paths:
   /api/movies:
