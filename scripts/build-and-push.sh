@@ -12,8 +12,7 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # Check if user is logged in to Docker Hub
-docker info | grep "Username" > /dev/null
-if [ $? -ne 0 ]; then
+if ! docker info 2>/dev/null | grep -q "Username"; then
     echo "You are not logged in to Docker Hub."
     echo "Please run 'docker login' first."
     exit 1

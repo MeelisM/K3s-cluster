@@ -36,7 +36,6 @@ create_cluster() {
   echo "export KUBECONFIG=~/.kube/k3s-config"
   echo "Cluster created"
   
-  # After creating the cluster, apply manifests and set up the database
   apply_manifests
 }
 

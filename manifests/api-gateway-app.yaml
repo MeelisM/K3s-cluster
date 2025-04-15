@@ -24,7 +24,7 @@ spec:
             ]
       containers:
         - name: api-gateway
-          image: meelisdocker/api-gateway:latest
+          image: orchestratorproject/api-gateway:latest
           ports:
             - containerPort: 3000
           env:
@@ -80,7 +80,7 @@ metadata:
   name: api-gateway-hpa
 spec:
   scaleTargetRef:
-    apiVersion: v1
+    apiVersion: apps/v1
     kind: Deployment
     name: api-gateway-app
   minReplicas: 1
