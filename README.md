@@ -57,9 +57,11 @@ chmod +x scripts/build-and-push.sh
 ./build-and-push.sh <your_dockerhub_username>
 ```
 
-2. Update image path in every manifest file.
+2. Update Docker image path in every manifest file.
 
-   For example: `image: <your_dockerhub_username>/billing-queue:latest`
+```
+image: <your_dockerhub_username>/billing-queue:latest
+```
 
 ## Infrastructure management
 
