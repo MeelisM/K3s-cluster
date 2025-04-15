@@ -51,7 +51,8 @@ mv .env-example .env
 ```
 
 3. Set up the Kubernetes cluster.<br>
-   Use the `scripts/orchestrator.sh` script to create and manage the Kubernetes cluster.
+
+Use the `scripts/orchestrator.sh` script to create and manage the Kubernetes cluster.
 
 ```bash
 chmod +x scripts/orchestrator.sh
