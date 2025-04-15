@@ -2,6 +2,22 @@
 
 This project implements a microservices architecture using Kubernetes. It consists of multiple services that work together to provide a complete application.
 
+## Table of Contents
+
+- [Architecture Overview](#architecture-overview)
+- [Prerequisites](#prerequisites)
+- [Setup and Installation](#setup-and-installation)
+  - [Using your own Docker Hub account](#using-your-own-docker-hub-account)
+- [Infrastructure Management](#infrastructure-management)
+- [Components](#components)
+  - [API Gateway (api-gateway-app)](#api-gateway-api-gateway-app)
+  - [Inventory Service (inventory-app)](#inventory-service-inventory-app)
+  - [Billing Service (billing-app)](#billing-service-billing-app)
+  - [Databases](#databases)
+  - [Message Queue (RabbitMQ)](#message-queue-rabbitmq)
+- [API Documentation](#api-documentation)
+- [Postman Collections](#postman-collections)
+
 ## Architecture Overview
 
 The system consists of the following components:
@@ -65,6 +81,8 @@ export KUBECONFIG=~/.kube/k3s-config
 
 ### Using your own Docker Hub account
 
+This repository includes the `build-and-push.sh` script to build and push images to Docker Hub.
+
 1. Build your Docker images and push them to Docker Hub.
 
 ```bash
@@ -72,11 +90,20 @@ chmod +x scripts/build-and-push.sh
 ./scripts/build-and-push.sh <your_dockerhub_username>
 ```
 
-2. Update Docker image path in every manifest file.
+2. After building and pushing, you must update the image field in all Kubernetes manifest files with your Docker Hub username:
+
+For example, in the manifests:
 
 `image: <your_dockerhub_username>/billing-queue:latest`
 
+This change needs to be made in each manifest.
+
 Then execute the `./scripts/orchestrator.sh` script.
+
+```bash
+chmod +x scripts/orchestrator.sh
+./scripts/orchestrator.sh create
+```
 
 ## Infrastructure management
 
@@ -136,6 +163,7 @@ Check the status of the cluster
 
 - Port: 8080
 - Description: Processes orders through RabbitMQ queue
+- Deployed as Statefulset
 
 ### Databases
 
@@ -154,7 +182,7 @@ Check the status of the cluster
 
 ## API Documentation
 
-Documentation is available at http://192.168.56.10:3000/api-docs
+Documentation is available at: [http://192.168.56.10:3000/api-docs](http://192.168.56.10:3000/api-docs)
 
 ## Postman Collections
 
