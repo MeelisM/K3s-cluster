@@ -14,7 +14,7 @@ This project implements a microservices architecture using Kubernetes. It consis
   - [Inventory Service (inventory-app)](#inventory-service-inventory-app)
   - [Billing Service (billing-app)](#billing-service-billing-app)
   - [Databases](#databases)
-  - [Message Queue (RabbitMQ)](#message-queue-rabbitmq)
+  - [RabbitMQ Message Queue (billing-queue)](#rabbitmq-message-queue-billing-queue)
 - [API Documentation](#api-documentation)
 - [Postman Collections](#postman-collections)
 
@@ -168,14 +168,14 @@ Check the status of the cluster
 
 ### Databases
 
-- Inventory Database (inventory-db)
+- PostgreSQL Inventory Database (inventory-db)
   - Port: 5432
   - Deployed as StatefulSet with persistent storage
-- Billing Database (billing-db)
+  - PostgreSQL Billing Database (billing-db)
   - Port: 5432
   - Deployed as StatefulSet with persistent storage
 
-### Message Queue (billing-queue)
+### RabbitMQ Message Queue (billing-queue)
 
 - AMQP Port: 5672
 - Management Port: 15672
