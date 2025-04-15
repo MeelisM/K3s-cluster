@@ -168,14 +168,14 @@ Check the status of the cluster
 
 ### Databases
 
-- Inventory Database (PostgreSQL)
+- Inventory Database (inventory-db)
   - Port: 5432
   - Deployed as StatefulSet with persistent storage
-- Billing Database (PostgreSQL)
+- Billing Database (billing-db)
   - Port: 5432
   - Deployed as StatefulSet with persistent storage
 
-### Message Queue (RabbitMQ)
+### Message Queue (billing-queue)
 
 - AMQP Port: 5672
 - Management Port: 15672
