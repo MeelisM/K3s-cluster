@@ -126,8 +126,18 @@ To test the billing-queue functionality:
 
 - Send an order while the billing-app is running.
   - Verify that the order appears in the database.
-- Stop the billing-app: `kubectl scale deployment billing-app --replicas=0`
-  - Send an order.
-  - Verify that the `gateway-api` accepts it.
-- Start the billing-app: `kubectl scale deployment billing-app --replicas=1`
-  - Verify that the queued order appears in the database.
+- Stop the billing-app:
+
+```
+kubectl scale deployment billing-app --replicas=0
+```
+
+- Send an order.
+- Verify that the `gateway-api` accepts it.
+- Start the billing-app:
+
+```
+kubectl scale deployment billing-app --replicas=1
+```
+
+- Verify that the queued order appears in the database.
