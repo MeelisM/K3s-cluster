@@ -1,4 +1,9 @@
 #!/bin/bash
+LIGHTBLUE='\033[1;36m'
+LIGHTGREEN='\033[1;32m'
+LIGHTRED='\033[1;31m'
+NC='\033[0m'
+
 usage() {
   echo "Usage: $0 [create|start|stop|delete|apply|status]"
   echo " create: Create the Kubernetes cluster"
@@ -12,21 +17,21 @@ usage() {
 
 check_vagrant() {
   if ! command -v vagrant &> /dev/null; then
-    echo "Vagrant is not installed. Please install Vagrant first."
+    echo -e "${LIGHTRED}Vagrant is not installed. Please install Vagrant first.${NC}"
     exit 1
   fi
 }
 
 check_kubectl() {
   if ! command -v kubectl &> /dev/null; then
-    echo "kubectl is not installed. Please install kubectl first."
+    echo -e "${LIGHTRED}kubectl is not installed. Please install kubectl first.${NC}"
     exit 1
   fi
 }
 
 create_cluster() {
   check_vagrant
-  echo "Creating Kubernetes cluster..."
+  echo -e "${LIGHTBLUE}Creating Kubernetes cluster...${NC}"
   vagrant up
   # Copy kubeconfig to local machine
   mkdir -p ~/.kube
@@ -34,60 +39,72 @@ create_cluster() {
   export KUBECONFIG=~/.kube/k3s-config
   echo "To use kubectl with this cluster, run:"
   echo "export KUBECONFIG=~/.kube/k3s-config"
-  echo "Cluster created"
+  echo -e "${LIGHTGREEN}Cluster created${NC}"
   
   apply_manifests
 }
 
 start_cluster() {
   check_vagrant
-  echo "Starting Kubernetes cluster..."
+  echo -e "${LIGHTBLUE}Starting Kubernetes cluster...${NC}"
   vagrant up
-  echo "Cluster started"
+  echo -e "${LIGHTGREEN}Cluster started${NC}"
 }
 
 stop_cluster() {
   check_vagrant
-  echo "Stopping Kubernetes cluster..."
+  echo -e "${LIGHTBLUE}Stopping Kubernetes cluster...${NC}"
   vagrant halt
-  echo "Cluster stopped"
+  echo -e "${LIGHTGREEN}Cluster stopped${NC}"
 }
 
 delete_cluster() {
   check_vagrant
-  echo "Deleting Kubernetes cluster..."
+  echo -e "${LIGHTBLUE}Deleting Kubernetes cluster...${NC}"
   vagrant destroy -f
-  echo "Deleting K3s configuration..."
+  echo -e "${LIGHTBLUE}Deleting K3s configuration...${NC}"
   rm -rf ~/.kube/k3s-config
   rm -f ./token
   rm -rf ./.vagrant
-  echo "Cluster and configuration deleted"
+  echo -e "${LIGHTGREEN}Cluster and configuration deleted${NC}"
 }
 
 apply_manifests() {
   check_kubectl
-  echo "Applying Kubernetes manifests..."
+  echo -e "${LIGHTBLUE}Applying Kubernetes manifests...${NC}"
   export KUBECONFIG=~/.kube/k3s-config
   echo "======================================"
-    echo "IMPORTANT: To use kubectl with this cluster, run:"
+    echo -e "${LIGHTBLUE}IMPORTANT: To use kubectl with this cluster, run:${NC}"
     echo "export KUBECONFIG=~/.kube/k3s-config"
-    echo "Or add this line to your ~/.bashrc or ~/.zshrc file for permanent configuration"
+    echo -e "${LIGHTBLUE}Or add this line to your ~/.bashrc or ~/.zshrc file for permanent configuration${NC}"
     echo "======================================"
   kubectl apply -k .
-  echo "Manifests applied!"
+  echo -e "${LIGHTGREEN}Manifests applied!${NC}"
 }
 
 check_status() {
   check_kubectl
-  echo "Checking Kubernetes cluster status..."
-  echo "Nodes:"
+  echo -e "${LIGHTBLUE}Checking Kubernetes cluster status...${NC}"
+  echo
+  echo -e "${LIGHTBLUE}Nodes:${NC}"
+  echo "======================================"
   kubectl get nodes -o wide
   echo ""
-  echo "Pods:"
+  echo -e "${LIGHTBLUE}Pods:${NC}"
+  echo "======================================"
   kubectl get pods -A
   echo ""
-  echo "Services:"
+  echo -e "${LIGHTBLUE}Services:${NC}"
+  echo "======================================"
   kubectl get services -A
+  echo ""
+  echo -e "${LIGHTBLUE}Autoscaling:${NC}"
+  echo "======================================"
+  kubectl get hpa -A
+  echo ""
+  echo -e "${LIGHTBLUE}Persistent Volumes:${NC}"
+  echo "======================================"
+  kubectl get pv,pvc -A
 }
 
 case "$1" in
