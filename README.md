@@ -26,7 +26,13 @@ The system consists of the following components:
 git clone https://01.kood.tech/git/mmumm/orchestrator.git && cd orchestrator
 ```
 
-2. Set up the Kubernetes cluster
+2. Rename `.env-example` to `.env`
+
+```bash
+mv .env-example .env
+```
+
+3. Set up the Kubernetes cluster
    Use the `scripts/orchestrator.sh` script to create and manage the Kubernetes cluster.
 
 ```bash
@@ -59,9 +65,9 @@ chmod +x scripts/build-and-push.sh
 
 2. Update Docker image path in every manifest file.
 
-```
-image: <your_dockerhub_username>/billing-queue:latest
-```
+`image: <your_dockerhub_username>/billing-queue:latest`
+
+Then execute the `./scripts/orchestrator.sh` script.
 
 ## Infrastructure management
 
