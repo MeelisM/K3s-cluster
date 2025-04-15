@@ -60,6 +60,8 @@ delete_cluster() {
   vagrant destroy -f
   echo "Deleting K3s configuration..."
   rm -rf ~/.kube/k3s-config
+  rm -f ./token
+  rm -rf ./.vagrant
   echo "Cluster and configuration deleted"
 }
 

@@ -13,3 +13,5 @@ resources:
   - manifests/inventory-app.yaml
   - manifests/api-gateway-app.yaml
   - manifests/billing-db.yaml
+  - manifests/billing-app.yaml
+  - manifests/billing-queue.yaml
