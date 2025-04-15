@@ -11,7 +11,7 @@ The system consists of the following components:
 - Billing Service with PostgreSQL database
 - RabbitMQ Message Queue
 
-![Cluster Status Image](/image/status.png)
+![Terminal output showing the status of Kubernetes nodes, pods, services, autoscaling and persistent volumes using orchestrator.sh script](/image/status.png "Kubernetes Cluster Status: Nodes, Pods, Services, Autoscaling, and Persistent Volumes")
 
 ## Prerequisites
 
