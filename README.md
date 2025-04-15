@@ -27,11 +27,11 @@ git clone https://01.kood.tech/git/mmumm/orchestrator.git && cd orchestrator
 ```
 
 2. Set up the Kubernetes cluster
-   Use the `orchestrator.sh` script to create and manage the Kubernetes cluster.
+   Use the `scripts/orchestrator.sh` script to create and manage the Kubernetes cluster.
 
 ```bash
-chmod +x orchestrator.sh
-./orchestrator.sh create
+chmod +x scripts/orchestrator.sh
+./scripts/orchestrator.sh create
 ```
 
 This will:
@@ -45,7 +45,7 @@ This will:
 3. Verify deployment
 
 ```bash
-./orchestrator.sh status
+./scripts/orchestrator.sh status
 ```
 
 ### Using your own Docker Hub account
@@ -54,7 +54,7 @@ This will:
 
 ```bash
 chmod +x scripts/build-and-push.sh
-./build-and-push.sh <your_dockerhub_username>
+./scripts/build-and-push.sh <your_dockerhub_username>
 ```
 
 2. Update Docker image path in every manifest file.
@@ -68,37 +68,37 @@ image: <your_dockerhub_username>/billing-queue:latest
 Create the cluster and apply manifests
 
 ```bash
-./orchestrator create
+./scripts/orchestrator create
 ```
 
 Start the cluster
 
 ```bash
-./orchestrator start
+./scripts/orchestrator start
 ```
 
 Stop the cluster
 
 ```bash
-./orchestrator stop
+./scripts/orchestrator stop
 ```
 
 Delete the cluster
 
 ```bash
-./orchestrator delete
+./scripts/orchestrator delete
 ```
 
 Apply all manifests
 
 ```bash
-./orchestrator apply
+./scripts/orchestrator apply
 ```
 
 Check the status of the cluster
 
 ```bash
-./orchestrator status
+./scripts/orchestrator status
 ```
 
 ## API Documentation
@@ -128,16 +128,12 @@ To test the billing-queue functionality:
   - Verify that the order appears in the database.
 - Stop the billing-app:
 
-```
-kubectl scale deployment billing-app --replicas=0
-```
+`kubectl scale deployment billing-app --replicas=0`
 
 - Send an order.
 - Verify that the `gateway-api` accepts it.
 - Start the billing-app:
 
-```
-kubectl scale deployment billing-app --replicas=1
-```
+`kubectl scale deployment billing-app --replicas=1`
 
 - Verify that the queued order appears in the database.
