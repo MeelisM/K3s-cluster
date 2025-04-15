@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5feb3af4-7be6-49d9-ad05-4a7c7b1d49b0",
-		"name": "playing-with-containers",
+		"_postman_id": "ba0372e5-a1eb-40b1-ab4b-a894602f5674",
+		"name": "orchestrator",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "41003333"
 	},
