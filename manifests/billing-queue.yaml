@@ -5,6 +5,7 @@ metadata:
   labels:
     app: billing-queue
 spec:
+  type: NodePort
   selector:
     app: billing-queue
   ports:
@@ -16,6 +17,7 @@ spec:
       protocol: TCP
       port: 15672
       targetPort: 15672
+      nodePort: 31572
 ---
 apiVersion: apps/v1
 kind: StatefulSet
