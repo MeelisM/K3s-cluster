@@ -1,7 +1,7 @@
 secretGenerator:
   - name: orchestrator-secrets
     envs:
-      - .env
+      - ./.env
 generatorOptions:
   disableNameSuffixHash: true
   labels:

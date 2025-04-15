@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: meelisdocker/billing-db:latest
+          image: orchestratorproject/billing-db:latest
           ports:
             - containerPort: 5432
           env:

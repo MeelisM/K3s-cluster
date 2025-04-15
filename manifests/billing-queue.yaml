@@ -38,7 +38,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: billing-queue
-          image: meelisdocker/billing-queue:latest
+          image: orchestratorproject/billing-queue:latest
           env:
             - name: RABBITMQ_DEFAULT_USER
               valueFrom:

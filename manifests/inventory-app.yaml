@@ -24,7 +24,7 @@ spec:
             ]
       containers:
         - name: inventory-app
-          image: meelisdocker/inventory-app:latest
+          image: orchestratorproject/inventory-app:latest
           ports:
             - containerPort: 8080
           env:
