@@ -50,7 +50,7 @@ git clone https://01.kood.tech/git/mmumm/orchestrator.git && cd orchestrator
 mv .env-example .env
 ```
 
-3. Set up the Kubernetes cluster
+3. Set up the Kubernetes cluster.<br>
    Use the `scripts/orchestrator.sh` script to create and manage the Kubernetes cluster.
 
 ```bash
