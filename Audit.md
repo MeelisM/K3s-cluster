@@ -184,3 +184,17 @@ It doesn't get written to database, but stays in queue.
 ##### Bring the billing-app up and see if the previous request gets added to the database.
 
 ![img](/image/billing_3.png)
+
+#### Kubernetes Components
+
+- API Server - The front-end of Kubernetes that exposes the API and processes REST operations (like kubectl commands).
+- Cloud Controller Manager - Integrates Kubernetes with cloud provider APIs (e.g., AWS, GCP) to manage load balancers, storage, and nodes.
+- Controller Manager - Runs core control loops (e.g., Deployments, ReplicaSets) to ensure the cluster’s desired state matches reality.
+- etcd - A distributed key-value store that persists Kubernetes cluster state (e.g., configs, secrets).
+- kubelet - The agent running on each node that ensures containers are launched and healthy as per Pod specs.
+- kube-proxy - Manages network rules on nodes to enable communication between Pods and services (like iptables/IPVS).
+- Scheduler - Assigns newly created Pods to nodes based on resource availability and constraints.
+- Control Plane - The brain of Kubernetes (includes API Server, Scheduler, Controller Manager, etcd) managing cluster operations.
+- Node - A worker machine (physical/virtual) that runs Pods and is managed by the control plane.
+- Pod - The smallest deployable unit in Kubernetes, running one or more containers.
+- Service - An abstraction to expose Pods as network services (e.g., load balancing).
