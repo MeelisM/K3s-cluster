@@ -1,8 +1,6 @@
-# orchestrator
+# K3s-cluster
 
 This project implements a microservices architecture using Kubernetes. It consists of multiple services that work together to provide a complete application.
-
-**--- Audit markdown can be found [HERE](/Audit.md) ---**
 
 ## Table of Contents
 
@@ -43,7 +41,7 @@ The system consists of the following components:
 1. Clone the repository
 
 ```bash
-git clone https://01.kood.tech/git/mmumm/orchestrator.git && cd orchestrator
+git clone https://github.com/MeelisM/K3s-cluster.git && cd K3s-cluter
 ```
 
 2. Rename `.env-example` to `.env`
