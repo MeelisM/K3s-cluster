@@ -41,7 +41,7 @@ The system consists of the following components:
 1. Clone the repository
 
 ```bash
-git clone https://github.com/MeelisM/K3s-cluster.git && cd K3s-cluter
+git clone https://github.com/MeelisM/K3s-cluster.git && cd K3s-cluster
 ```
 
 2. Rename `.env-example` to `.env`
